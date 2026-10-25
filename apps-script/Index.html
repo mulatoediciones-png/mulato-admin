@@ -54,7 +54,6 @@ V.clientes=function(){var h='';D.clientes.forEach(function(c){if(!c.nombre)retur
 V.gastos=function(){var h='<div class="kpis">'+kpi('Gastos del mes',m(D.r.gastos))+'</div>';
  D.gastos.forEach(function(g){h+='<div class="card"><div class="grid">'+fld('Concepto',inp('Gastos',g.row,1,g.concepto),1)+fld('Monto del mes',inp('Gastos',g.row,2,g.monto||0,1))+fld('Ya pagado',inp('Gastos',g.row,3,g.pagado||0,1))+'</div></div>'});return h};
 V.ajustes=function(){return'<div class="card"><div class="grid">'+fld('Mes en curso',inp('Resumen',2,2,D.mes))+fld('% que se queda la agencia (0.6 = 60%)',inp('Resumen',16,2,D.pct,1))+'</div></div>'
- +'<h2>Avisos a Telegram ahora</h2><div class="acts"><button class="b s" data-fn="avisoCobros">Cobros</button><button class="b s" data-fn="avisoPagos">Pagos</button><button class="b s" data-fn="cierreDeMes">Resumen</button></div>'
  +'<h2>Mes nuevo</h2><div class="card"><p class="mut">Guarda el mes en pestañas de historial dentro de la hoja, deja cobros y pagos en cero y abre el siguiente. Pasa solo el día 1.</p><button class="b s" data-fn="abrirMesNuevo" data-confirm="¿Cerrar '+esc(D.mes)+' y abrir el siguiente?">Cerrar '+esc(D.mes)+' ahora</button></div>'
  +'<p class="mut">Precios, pagos por plan y tabulador se editan en la hoja de Google (pestañas Ajustes y Tabulador).</p>'};
 function render(){if(!D)return;$('mes').textContent='· '+D.mes;$('tabs').innerHTML=TABS.map(function(t){return'<button data-tab="'+t[0]+'"'+(t[0]===tab?' class="on"':'')+'>'+t[1]+'</button>'}).join('');$('vista').innerHTML=V[tab]()}

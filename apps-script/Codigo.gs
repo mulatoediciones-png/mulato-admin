@@ -1,5 +1,5 @@
 /**
- * Mulato Admin - app web + avisos Telegram sobre la hoja
+ * Mulato Admin - app web sobre la hoja
  * "Sistema Mulato Ediciones - Administración".
  * Corre todo en Google. No depende de Claude.
  */
@@ -71,56 +71,7 @@ function agregarPersona() {
   throw new Error('No hay filas libres en Sueldos.');
 }
 
-/* ---------- Telegram ---------- */
-function enviarTelegram(texto) {
-  var p = PropertiesService.getScriptProperties();
-  var token = p.getProperty('TELEGRAM_TOKEN');
-  var chats = (p.getProperty('TELEGRAM_CHATS') || '').split(',').filter(String);
-  if (!token || !chats.length) throw new Error('Falta configurar Telegram (menú Agencia > Configurar Telegram).');
-  chats.forEach(function (c) {
-    UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/sendMessage', { method: 'post', muteHttpExceptions: true, payload: { chat_id: c, text: texto } });
-  });
-}
-function configurarTelegram() {
-  var ui = SpreadsheetApp.getUi();
-  var r = ui.prompt('Telegram', 'Pega el token que te dio @BotFather.\n(Antes, los dos CEO deben abrir el bot y escribirle /start)', ui.ButtonSet.OK_CANCEL);
-  if (r.getSelectedButton() !== ui.Button.OK) return;
-  var token = r.getResponseText().trim();
-  var res = JSON.parse(UrlFetchApp.fetch('https://api.telegram.org/bot' + token + '/getUpdates', { muteHttpExceptions: true }).getContentText());
-  if (!res.ok) { ui.alert('El token no es válido. Revisa que lo copiaste completo.'); return; }
-  var ids = {};
-  res.result.forEach(function (u) { if (u.message && u.message.chat) ids[u.message.chat.id] = u.message.chat.first_name || ''; });
-  var lista = Object.keys(ids);
-  if (!lista.length) { ui.alert('Nadie le ha escrito al bot. Cada CEO debe abrirlo en Telegram, escribir /start y repetir este paso.'); return; }
-  var p = PropertiesService.getScriptProperties();
-  p.setProperty('TELEGRAM_TOKEN', token); p.setProperty('TELEGRAM_CHATS', lista.join(','));
-  enviarTelegram('✅ Mulato Admin: avisos conectados.');
-  ui.alert('Listo. Chats conectados: ' + lista.map(function (i) { return ids[i]; }).join(', ') + '. Debes haber recibido un mensaje de prueba.');
-}
 function mesActual() { return String(hoja('Resumen').getRange('B2').getDisplayValue()); }
-
-function avisoCobros() {
-  var f = hoja('Cobros').getRange('A2:F11').getValues(), l = [], total = 0;
-  f.forEach(function (r) { if (r[0] && r[5] > 0) { l.push('• ' + r[0] + ' (' + r[1] + '): ' + money(r[5]) + ' - ' + r[2]); total += r[5]; } });
-  if (!l.length) { enviarTelegram('💰 ' + mesActual() + ': todo cobrado. ¡Excelente!'); return 'Enviado'; }
-  enviarTelegram('💰 Cobros pendientes - ' + mesActual() + '\n' + l.join('\n') + '\n\nFalta cobrar: ' + money(total)); return 'Enviado';
-}
-function avisoPagos() {
-  var f = hoja('Sueldos').getRange('A2:K10').getValues(), l = [], total = 0;
-  f.forEach(function (r) { if (r[0] && r[9] > 0) { l.push('• ' + r[0] + ': ' + money(r[9])); total += r[9]; } });
-  var caja = hoja('Resumen').getRange('B24').getValue();
-  if (!l.length) { enviarTelegram('✅ ' + mesActual() + ': todos los sueldos están pagados.'); return 'Enviado'; }
-  var t = '💸 Pagos pendientes - ' + mesActual() + '\n' + l.join('\n') + '\n\nTotal por pagar: ' + money(total) + '\nDinero en caja: ' + money(caja);
-  if (caja < total) t += '\n⚠️ La caja no alcanza. Faltan ' + money(total - caja) + '.';
-  enviarTelegram(t); return 'Enviado';
-}
-function cierreDeMes() {
-  var s = hoja('Resumen'), v = function (c) { return s.getRange(c).getValue(); };
-  enviarTelegram('📊 Resumen - ' + mesActual() + '\nA cobrar: ' + money(v('B5')) + ' (cobrado ' + money(v('B6')) + ')\nA pagar: ' + money(v('B12')) +
-    '\nGanancia: ' + money(v('B15')) + '\nSe queda la agencia: ' + money(v('B17')) + '\nBono de cada CEO: ' + money(v('B19')) +
-    '\nSueldos sobre lo cobrado: ' + Math.round(v('B29') * 100) + '% (meta 60%)');
-  return 'Enviado';
-}
 
 /* ---------- Mes nuevo y tarea diaria ---------- */
 function abrirMesNuevo() {
@@ -136,21 +87,15 @@ function abrirMesNuevo() {
   if (i < 0) return 'No entendí el mes';
   i++; if (i > 11) { i = 0; y++; }
   hoja('Resumen').getRange('B2').setValue(MESES[i] + ' ' + y);
-  try { enviarTelegram('🗓️ Se abrió ' + MESES[i] + ' ' + y + '. Revisa Clientes (precios y pautas) y Gastos.'); } catch (e) {}
   return 'Se abrió ' + MESES[i] + ' ' + y;
 }
 function tareaDiaria() {
-  var d = new Date(), n = Number(Utilities.formatDate(d, ZONA, 'd'));
-  var ult = new Date(Number(Utilities.formatDate(d, ZONA, 'yyyy')), Number(Utilities.formatDate(d, ZONA, 'M')), 0).getDate();
-  if (n === 4 || n === 25) avisoCobros();
-  if (n === 5) avisoPagos();
-  if (n === ult) cierreDeMes();
-  if (n === 1) abrirMesNuevo();
+  if (Number(Utilities.formatDate(new Date(), ZONA, 'd')) === 1) abrirMesNuevo();
 }
 function instalarAvisos() {
   ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'tareaDiaria') ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('tareaDiaria').timeBased().everyDays(1).atHour(9).inTimezone(ZONA).create();
-  SpreadsheetApp.getUi().alert('Avisos activados: todos los días a las 9:00 (hora de Caracas).');
+  SpreadsheetApp.getUi().alert('Listo: el día 1 de cada mes se guarda el mes anterior y se abre el siguiente.');
 }
 function prepararHoja() {
   var c = hoja('Cobros');
@@ -161,6 +106,5 @@ function prepararHoja() {
 function onOpen() {
   SpreadsheetApp.getUi().createMenu('Agencia')
     .addItem('1. Preparar hoja (una vez)', 'prepararHoja')
-    .addItem('2. Configurar Telegram', 'configurarTelegram')
-    .addItem('3. Activar avisos automáticos', 'instalarAvisos').addToUi();
+    .addItem('2. Activar cierre de mes automático', 'instalarAvisos').addToUi();
 }
