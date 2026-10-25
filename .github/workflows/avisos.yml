@@ -1,0 +1,31 @@
+name: Avisos
+on:
+  schedule:
+    - cron: '0 13 * * *'   # 9:00 hora de Caracas
+  workflow_dispatch:
+    inputs:
+      modo:
+        description: 'auto, cobros, pagos, resumen o prueba'
+        default: 'auto'
+permissions:
+  contents: write
+concurrency:
+  group: datos
+jobs:
+  avisos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/notify.js
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHATS: ${{ secrets.TELEGRAM_CHATS }}
+          MODO: ${{ github.event.inputs.modo || 'auto' }}
+      - run: |
+          git config user.name "Mulato Admin"
+          git config user.email "actions@users.noreply.github.com"
+          git add data.json
+          git diff --cached --quiet || (git commit -m "Abrir mes nuevo" && git push)

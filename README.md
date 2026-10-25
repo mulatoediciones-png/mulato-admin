@@ -1,9 +1,9 @@
 # Mulato Admin
 
-Sistema de administración de Mulato Ediciones (solo CEO).
+Sistema de administración de Mulato Ediciones (solo CEO). Funciona sin Google ni Claude.
 
-- `index.html`: app web de solo lectura (GitHub Pages) que muestra cobros, sueldos y ganancia leyendo la hoja de Google.
-- `apps-script/Codigo.gs`: avisos por Telegram y cierre de mes (se pega en Extensiones > Apps Script de la hoja).
-- `docs/GUIA-GOOGLE-CLOUD.md`: cómo conectar la app con la hoja.
+- `index.html`, `app.js`, `calc.js`: la app (cobros, sueldos, clientes, gastos, precios, ajustes).
+- `data.json`: los datos. La app los lee y los guarda aquí.
+- `.github/workflows/avisos.yml` + `scripts/notify.js`: avisos diarios por Telegram y cierre de mes automático.
 
-Este repositorio es público: no guarda datos, tokens ni sueldos. Todo eso vive en la hoja de Google y en las propiedades del script.
+Instalación paso a paso: ver `GUIA.md`.

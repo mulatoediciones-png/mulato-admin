@@ -3,113 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1f3864">
 <title>Mulato Admin</title>
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--tx:#1b1f27;--mut:#6b7280;--bd:#e3e6eb;--ac:#1f3864;--ok:#157347;--bad:#b42318;--warn:#b45309}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1218;--card:#181c24;--tx:#e8eaee;--mut:#9aa3b2;--bd:#2a303b;--ac:#8fb0ff;--ok:#4cc38a;--bad:#ff7b72;--warn:#f0b455}}
+:root{--bg:#f4f5f8;--card:#fff;--tx:#161a22;--mut:#667085;--bd:#e2e5ec;--ac:#1f3864;--act:#fff;--ok:#157347;--bad:#b42318;--warn:#b45309;--in:#eef3ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#171b23;--tx:#e8eaee;--mut:#98a2b3;--bd:#2a303b;--ac:#7fa6ff;--act:#0e1116;--ok:#4cc38a;--bad:#ff7b72;--warn:#f0b455;--in:#1d2433}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:760px;margin:0 auto;padding:16px}
-h1{font-size:20px;margin:0}h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:24px 0 8px}
-header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:4px 14px}
-.row{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--bd)}
-.row:last-child{border-bottom:0}.row span:first-child{color:var(--mut)}
-.row b{font-variant-numeric:tabular-nums;text-align:right}
-.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.kpi{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px 14px}
-.kpi small{color:var(--mut);display:block}.kpi strong{font-size:22px;font-variant-numeric:tabular-nums}
-.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}
-button,input{font:inherit;border-radius:8px;border:1px solid var(--bd);padding:10px 12px;background:var(--card);color:var(--tx)}
-button{background:var(--ac);color:var(--bg);border-color:var(--ac);font-weight:600;cursor:pointer;min-height:44px}
-button.sec{background:transparent;color:var(--tx);border-color:var(--bd)}
-label{display:block;margin:12px 0 4px;color:var(--mut)}input{width:100%}
-.err{color:var(--bad);margin-top:12px}.hide{display:none}
-.tag{font-size:12px;color:var(--mut)}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;padding-bottom:76px}
+main{max-width:720px;margin:0 auto;padding:12px 16px}
+h1{font-size:18px;margin:0}h2{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--mut);margin:22px 0 8px}
+header{position:sticky;top:0;z-index:5;background:var(--bg);display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--bd)}
+header div{max-width:720px}
+#estado{font-size:12px;color:var(--mut)}
+nav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:1px solid var(--bd);display:flex;overflow-x:auto;z-index:6}
+nav button{flex:1;min-width:76px;background:none;border:0;color:var(--mut);padding:10px 4px;font-size:12px;min-height:56px;cursor:pointer}
+nav button.on{color:var(--ac);font-weight:700;border-top:2px solid var(--ac)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--bd)}
+.row:last-child{border-bottom:0}.row>span:first-child{color:var(--mut)}.row b{font-variant-numeric:tabular-nums;text-align:right}
+.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:6px}
+.kpi{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px 14px}
+.kpi small{color:var(--mut);display:block}.kpi strong{font-size:24px;font-variant-numeric:tabular-nums}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}.mut{color:var(--mut)}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.top b{font-size:16px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}.grid .w{grid-column:1/-1}
+label{display:block;font-size:12px;color:var(--mut);margin-bottom:2px}
+input,select,textarea{font:inherit;width:100%;border-radius:8px;border:1px solid var(--bd);padding:9px 10px;background:var(--in);color:var(--tx);min-height:42px}
+input[type=checkbox]{width:22px;min-height:22px;height:22px}
+button.b{font:inherit;border-radius:8px;border:1px solid var(--ac);background:var(--ac);color:var(--act);font-weight:600;padding:9px 14px;min-height:42px;cursor:pointer}
+button.s{background:transparent;color:var(--ac)}button.d{background:transparent;color:var(--bad);border-color:var(--bd)}
+.acts{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pill{font-size:12px;border:1px solid var(--bd);border-radius:20px;padding:1px 8px;color:var(--mut)}
+table{width:100%;border-collapse:collapse}td,th{padding:6px 4px;border-bottom:1px solid var(--bd);text-align:left;font-size:13px}th{color:var(--mut);font-weight:600}
+td input{padding:6px;min-height:34px}
+#msg{position:fixed;left:16px;right:16px;bottom:70px;max-width:560px;margin:auto;background:var(--tx);color:var(--bg);border-radius:10px;padding:10px 14px;z-index:9;display:none}
 </style>
 </head>
 <body>
-<main>
-<header><h1>Mulato Admin</h1><div><span id="mes" class="tag"></span> <button id="salir" class="sec hide">Salir</button> <button id="refrescar" class="sec hide">Actualizar</button></div></header>
-
-<section id="config" class="hide">
-  <h2>Primera vez</h2>
-  <div class="card" style="padding:14px">
-    <p>Pega los dos datos de la guía (docs/GUIA-GOOGLE-CLOUD.md). Se guardan solo en este navegador.</p>
-    <label for="cid">ID de cliente de Google (OAuth)</label><input id="cid" autocomplete="off" placeholder="1234-abc.apps.googleusercontent.com">
-    <label for="sid">ID de la hoja de cálculo</label><input id="sid" autocomplete="off" placeholder="1IocvmKX...">
-    <p><button id="guardar">Guardar y continuar</button></p>
-  </div>
-</section>
-
-<section id="login" class="hide">
-  <div class="card" style="padding:14px"><p>Solo pueden entrar las cuentas de Google con acceso a la hoja.</p>
-  <button id="entrar">Entrar con Google</button> <button id="cambiar" class="sec">Cambiar datos</button></div>
-</section>
-
-<section id="app" class="hide"></section>
-<p id="error" class="err" role="alert"></p>
-</main>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script>
-var $=function(i){return document.getElementById(i)};
-var store={get:function(k){try{return localStorage.getItem(k)||''}catch(e){return ''}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}},del:function(k){try{localStorage.removeItem(k)}catch(e){}}};
-var token='',client=null;
-var fmt=function(n){return typeof n==='number'?(n<0?'-':'')+'$'+Math.abs(Math.round(n)).toLocaleString('en-US'):(n||'')};
-var pct=function(n){return Math.round((Number(n)||0)*100)+'%'};
-function show(id){['config','login','app'].forEach(function(x){$(x).classList.toggle('hide',x!==id)});
-  $('salir').classList.toggle('hide',id!=='app');$('refrescar').classList.toggle('hide',id!=='app')}
-function init(){
-  if(!store.get('cid')||!store.get('sid')){show('config');return}
-  show('login');
-  if(window.google&&google.accounts){prepare()}else{setTimeout(init,300)}
-}
-function prepare(){
-  client=google.accounts.oauth2.initTokenClient({client_id:store.get('cid'),
-    scope:'https://www.googleapis.com/auth/spreadsheets.readonly',
-    callback:function(r){if(r.error){$('error').textContent='No se pudo entrar: '+r.error;return}token=r.access_token;cargar()}});
-}
-async function cargar(){
-  $('error').textContent='';
-  var u='https://sheets.googleapis.com/v4/spreadsheets/'+encodeURIComponent(store.get('sid'))+'/values:batchGet?valueRenderOption=UNFORMATTED_VALUE'
-   +'&ranges='+['Resumen!A1:B31','Cobros!A1:G12','Sueldos!A1:K11'].map(encodeURIComponent).join('&ranges=');
-  try{
-    var r=await fetch(u,{headers:{Authorization:'Bearer '+token}});
-    var j=await r.json();
-    if(!r.ok)throw new Error(j.error&&j.error.message||r.status);
-    pintar(j.valueRanges.map(function(v){return v.values||[]}));
-  }catch(e){$('error').textContent='No se pudo leer la hoja: '+e.message+'. Revisa el ID y que tu cuenta tenga acceso.';show('login')}
-}
-function pintar(d){
-  var R=d[0],C=d[1],S=d[2];
-  var v=function(r){return (R[r-1]||[])[1]};
-  $('mes').textContent=v(2)||'';
-  var h='<div class="big">'
-   +kpi('Falta cobrar',v(7),'')+kpi('Falta pagar a la gente',v(25),'')
-   +kpi('Ganancia del mes',v(15),Number(v(15))<0?'bad':'ok')+kpi('Dinero en caja',v(24),Number(v(24))<0?'bad':'')+'</div>';
-  h+='<h2>Resumen</h2><div class="card">'
-   +row('Total a cobrar',fmt(v(5)))+row('Ya cobrado',fmt(v(6)))+row('Total a pagar (sin bono)',fmt(v(12)))
-   +row('Se queda la agencia',fmt(v(17)))+row('Bono de cada CEO',fmt(v(19)))
-   +row('Ganancia sobre lo cobrado (meta 15%+)',pct(v(28)))
-   +row('Sueldos sobre lo cobrado (meta 60%-)','<span class="'+(Number(v(29))>0.6?'warn':'ok')+'">'+pct(v(29))+'</span>')+'</div>';
-  h+='<h2>Cobros</h2><div class="card">';
-  C.slice(1,11).forEach(function(r){if(r[0]&&r[0]!==0&&r[3])h+=row(esc(r[0])+' <small class="tag">'+esc(r[1]||'')+' · '+esc(r[2]||'')+'</small>',(r[5]>0?'<span class="warn">falta '+fmt(r[5])+'</span>':'<span class="ok">cobrado</span>'))});
-  h+='</div><h2>Sueldos</h2><div class="card">';
-  S.slice(1,10).forEach(function(r){if(r[0])h+=row(esc(r[0])+' <small class="tag">'+esc(r[1]||'')+'</small>',(r[9]>0?'<span class="warn">falta '+fmt(r[9])+'</span> <small class="tag">de '+fmt(r[7])+'</small>':'<span class="ok">pagado</span>'))});
-  h+='</div><p class="tag">Solo lectura. Para anotar cobros y pagos, abre la hoja de Google.</p>';
-  $('app').innerHTML=h;show('app');
-}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-function row(a,b){return '<div class="row"><span>'+a+'</span><b>'+b+'</b></div>'}
-function kpi(t,n,c){return '<div class="kpi"><small>'+t+'</small><strong class="'+c+'">'+fmt(n)+'</strong></div>'}
-$('guardar').onclick=function(){var c=$('cid').value.trim(),s=$('sid').value.trim();
-  var m=s.match(/\/d\/([\w-]+)/);if(m)s=m[1];
-  if(!c||!s){$('error').textContent='Faltan datos.';return}store.set('cid',c);store.set('sid',s);$('error').textContent='';init()};
-$('entrar').onclick=function(){if(client)client.requestAccessToken()};
-$('cambiar').onclick=function(){store.del('cid');store.del('sid');show('config')};
-$('salir').onclick=function(){if(token&&window.google)google.accounts.oauth2.revoke(token,function(){});token='';show('login')};
-$('refrescar').onclick=cargar;
-window.onload=init;
-</script>
+<header><h1>Mulato Admin <span id="mes" class="mut" style="font-weight:400"></span></h1><span id="estado"></span></header>
+<main id="vista"></main>
+<nav id="tabs"></nav>
+<div id="msg" role="status"></div>
+<script src="calc.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

@@ -1,0 +1,425 @@
+{
+ "mes": "Noviembre 2026",
+ "agenciaPct": 0.6,
+ "viatico": 50,
+ "videomakerPauta": 15.4,
+ "planPrecio": {
+  "Emprendedor": 120,
+  "Impulso": 200,
+  "Expansión": 300,
+  "Escala": 500
+ },
+ "pagos": {
+  "Emprendedor": {
+   "cm": 20,
+   "manuel": 20
+  },
+  "Impulso": {
+   "cm": 30,
+   "manuel": 30
+  },
+  "Expansión": {
+   "cm": 35,
+   "manuel": 40
+  },
+  "Escala": {
+   "cm": 50,
+   "manuel": 50
+  },
+  "Personalizado": {
+   "cm": 50,
+   "manuel": 100
+  }
+ },
+ "clientes": [
+  {
+   "id": 1,
+   "nombre": "WiFi Prado",
+   "plan": "Escala",
+   "precio": 470,
+   "viatico": false,
+   "pautas": 4,
+   "formaPago": "Bolívares a tasa euro",
+   "fechaLimite": "Del 1 al 5",
+   "estado": "Activo",
+   "cobrado": 0,
+   "obs": "La oficina queda en su local: no hay traslado."
+  },
+  {
+   "id": 2,
+   "nombre": "Deli Snacks",
+   "plan": "Personalizado",
+   "precio": 1000,
+   "viatico": true,
+   "pautas": 0,
+   "formaPago": "Bolívares a tasa BCV",
+   "fechaLimite": "Por acordar",
+   "estado": "Activo",
+   "cobrado": 0,
+   "obs": "Anotar las pautas del mes para calcular el viático."
+  },
+  {
+   "id": 3,
+   "nombre": "Mangueras El Prado",
+   "plan": "Emprendedor",
+   "precio": 120,
+   "viatico": false,
+   "pautas": 1,
+   "formaPago": "Bolívares a tasa euro",
+   "fechaLimite": "Del 1 al 5",
+   "estado": "Activo",
+   "cobrado": 0,
+   "obs": ""
+  },
+  {
+   "id": 4,
+   "nombre": "Cartopekf",
+   "plan": "Emprendedor",
+   "precio": 120,
+   "viatico": true,
+   "pautas": 1,
+   "formaPago": "Bolívares a tasa euro",
+   "fechaLimite": "Del 1 al 5",
+   "estado": "Activo",
+   "cobrado": 0,
+   "obs": ""
+  },
+  {
+   "id": 5,
+   "nombre": "Nua",
+   "plan": "Impulso",
+   "precio": 200,
+   "viatico": true,
+   "pautas": 1,
+   "formaPago": "Efectivo",
+   "fechaLimite": "Del 1 al 5",
+   "estado": "Activo",
+   "cobrado": 0,
+   "obs": ""
+  },
+  {
+   "id": 6,
+   "nombre": "Carnes Don Guillermo",
+   "plan": "Impulso",
+   "precio": 150,
+   "viatico": true,
+   "pautas": 1,
+   "formaPago": "Bolívares a tasa BCV",
+   "fechaLimite": "Último día del mes",
+   "estado": "Activo",
+   "cobrado": 0,
+   "obs": "Todavía paga 150. El plan vale 200."
+  }
+ ],
+ "equipo": [
+  {
+   "id": 7,
+   "nombre": "CEO 1",
+   "cargo": "Comercial, cobros y pautas de Meta",
+   "fijo": 300,
+   "porCuenta": "",
+   "bono": true,
+   "pagado": 0
+  },
+  {
+   "id": 8,
+   "nombre": "CEO 2",
+   "cargo": "Creativo y operaciones",
+   "fijo": 300,
+   "porCuenta": "",
+   "bono": true,
+   "pagado": 0
+  },
+  {
+   "id": 9,
+   "nombre": "Community manager",
+   "cargo": "Atención diaria de las cuentas",
+   "fijo": 0,
+   "porCuenta": "cm",
+   "bono": false,
+   "pagado": 0
+  },
+  {
+   "id": 10,
+   "nombre": "Videomaker",
+   "cargo": "Graba pautas y edita reels",
+   "fijo": 200,
+   "porCuenta": "",
+   "bono": false,
+   "pagado": 0
+  },
+  {
+   "id": 11,
+   "nombre": "Manuel Pineda",
+   "cargo": "Diseñador y videos con IA",
+   "fijo": 200,
+   "porCuenta": "manuel",
+   "bono": false,
+   "pagado": 0
+  },
+  {
+   "id": 12,
+   "nombre": "Eduardo Daboin",
+   "cargo": "Asistente de producción (aprendiz)",
+   "fijo": 100,
+   "porCuenta": "",
+   "bono": false,
+   "pagado": 0
+  }
+ ],
+ "gastos": [
+  {
+   "concepto": "Herramientas (Claude y CapCut)",
+   "monto": 50,
+   "pagado": 0
+  },
+  {
+   "concepto": "Viáticos (traslados a las pautas)",
+   "monto": 200,
+   "pagado": 0
+  }
+ ],
+ "tabulador": [
+  {
+   "servicio": "Video estándar (reel)",
+   "unidad": "por video",
+   "precio": 30,
+   "estimado": false,
+   "cant": [
+    6,
+    8,
+    6,
+    0
+   ]
+  },
+  {
+   "servicio": "Video avanzado (reel)",
+   "unidad": "por video",
+   "precio": 45,
+   "estimado": false,
+   "cant": [
+    0,
+    0,
+    6,
+    18
+   ]
+  },
+  {
+   "servicio": "Carrusel o infografía",
+   "unidad": "por pieza",
+   "precio": 20,
+   "estimado": false,
+   "cant": [
+    0,
+    4,
+    6,
+    6
+   ]
+  },
+  {
+   "servicio": "Flyer",
+   "unidad": "por pieza",
+   "precio": 10,
+   "estimado": false,
+   "cant": [
+    6,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "servicio": "Story",
+   "unidad": "por story",
+   "precio": 1,
+   "estimado": true,
+   "cant": [
+    40,
+    60,
+    90,
+    0
+   ]
+  },
+  {
+   "servicio": "Stories ilimitadas (cobertura diaria)",
+   "unidad": "por mes",
+   "precio": 60,
+   "estimado": true,
+   "cant": [
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "servicio": "Pauta de producción integral (4 horas)",
+   "unidad": "por pauta",
+   "precio": 130,
+   "estimado": false,
+   "cant": [
+    1,
+    1,
+    2,
+    4
+   ]
+  },
+  {
+   "servicio": "Estrategia de contenido",
+   "unidad": "por mes",
+   "precio": 40,
+   "estimado": true,
+   "cant": [
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "servicio": "Optimización de SEO",
+   "unidad": "por mes",
+   "precio": 25,
+   "estimado": true,
+   "cant": [
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "servicio": "Setup o auditoría de perfiles",
+   "unidad": "por mes",
+   "precio": 50,
+   "estimado": true,
+   "cant": [
+    0,
+    1,
+    1,
+    0
+   ]
+  },
+  {
+   "servicio": "Content plan",
+   "unidad": "por publicación",
+   "precio": 5,
+   "estimado": true,
+   "cant": [
+    0,
+    12,
+    18,
+    24
+   ]
+  },
+  {
+   "servicio": "Estrategia omnicanal premium",
+   "unidad": "por mes",
+   "precio": 100,
+   "estimado": true,
+   "cant": [
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "servicio": "Copywriting básico",
+   "unidad": "por mes",
+   "precio": 40,
+   "estimado": true,
+   "cant": [
+    0,
+    1,
+    0,
+    0
+   ]
+  },
+  {
+   "servicio": "Copywriting de conversión",
+   "unidad": "por mes",
+   "precio": 60,
+   "estimado": true,
+   "cant": [
+    0,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "servicio": "Copywriting persuasivo avanzado",
+   "unidad": "por mes",
+   "precio": 80,
+   "estimado": true,
+   "cant": [
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "servicio": "Campaña de ads (iniciación)",
+   "unidad": "por campaña",
+   "precio": 80,
+   "estimado": true,
+   "cant": [
+    0,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "servicio": "Paid media avanzado",
+   "unidad": "por mes",
+   "precio": 200,
+   "estimado": true,
+   "cant": [
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "servicio": "Auditoría de ventas",
+   "unidad": "por sesión",
+   "precio": 90,
+   "estimado": false,
+   "cant": [
+    0,
+    0,
+    1,
+    0
+   ]
+  },
+  {
+   "servicio": "Consultoría integral",
+   "unidad": "por servicio",
+   "precio": 150,
+   "estimado": false,
+   "cant": [
+    0,
+    0,
+    0,
+    1
+   ]
+  },
+  {
+   "servicio": "Dashboard de control comercial",
+   "unidad": "por mes",
+   "precio": 40,
+   "estimado": true,
+   "cant": [
+    0,
+    0,
+    1,
+    0
+   ]
+  }
+ ],
+ "historial": []
+}
